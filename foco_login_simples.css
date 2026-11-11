@@ -1,0 +1,229 @@
+/* CSS simples para a tela de login FOCO - Nova paleta de cores */
+:root {
+    --fundo-principal: #F9F9FB;
+    --fundo-secundario: #E8E7EE;
+    --borda: #D5D4E2;
+    --borda-suave: #BCBAD4;
+    --texto-secundario: #9B98C2;
+    --destaque: #4F46E5;
+    --destaque-hover: #595590;
+    --texto-escuro: #47456D;
+    --titulo: #37354F;
+    --texto-principal: #252433;
+    --texto-muito-escuro: #14141A;
+    --branco: #ffffff;
+    --fonte-principal: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--fundo-principal);
+    color: var(--texto-principal);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--destaque);
+    color: var(--branco);
+    text-align: center;
+    padding: 32px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+header p {
+    margin: 8px 0 0;
+    font-size: 16px;
+    opacity: 0.95;
+}
+
+main {
+    width: 90%;
+    max-width: 650px;
+    margin: 40px auto;
+}
+
+.apresentacao {
+    background-color: var(--fundo-secundario);
+    text-align: center;
+    padding: 28px;
+    border-radius: 12px;
+    margin-bottom: 28px;
+    border: 1px solid var(--borda);
+}
+
+.apresentacao h2 {
+    color: var(--destaque);
+    margin-bottom: 8px;
+    font-size: 24px;
+}
+
+.apresentacao p {
+    line-height: 1.6;
+    color: var(--texto-escuro);
+    font-size: 15px;
+}
+
+.login {
+    background-color: var(--branco);
+    padding: 32px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(63, 63, 95, 0.1);
+}
+
+.login h2 {
+    color: var(--titulo);
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.login > p {
+    line-height: 1.5;
+    color: var(--texto-escuro);
+    margin-bottom: 24px;
+    font-size: 15px;
+}
+
+.campo {
+    margin: 18px 0;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--titulo);
+}
+
+.campo input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--borda-suave);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    background-color: var(--branco);
+    color: var(--texto-principal);
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: var(--destaque);
+}
+
+.opcoes {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.opcoes label {
+    font-size: 14px;
+    color: var(--texto-principal);
+    cursor: pointer;
+}
+
+a {
+    color: var(--destaque);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    width: 100%;
+    background-color: var(--destaque);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--destaque-hover);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#mensagem {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.cadastro {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--texto-escuro);
+}
+
+.aviso {
+    color: var(--texto-secundario);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 16px;
+    font-style: italic;
+}
+
+footer {
+    background-color: var(--destaque);
+    color: var(--branco);
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 0 0 12px 12px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    main {
+        width: 92%;
+        margin: 30px auto;
+    }
+
+    .login {
+        padding: 24px;
+    }
+
+    .opcoes {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .opcoes label {
+        width: 100%;
+    }
+}

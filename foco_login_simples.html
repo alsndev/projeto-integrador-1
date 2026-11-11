@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | FOCO</title>
+    <link rel="stylesheet" href="foco_login_simples.css">
+</head>
+<body>
+
+    <header>
+        <h1>FOCO</h1>
+        <p>Plataforma de Estudos</p>
+    </header>
+
+    <main>
+        <section class="apresentacao">
+            <h2>Seu futuro começa com foco!</h2>
+            <p>Organize seus estudos, acompanhe seu progresso e alcance seus objetivos.</p>
+        </section>
+
+        <section class="login" aria-labelledby="titulo-login">
+            <h2 id="titulo-login">Bem-vindo de volta!</h2>
+            <p>Entre na sua conta para continuar estudando.</p>
+
+            <form id="form-login">
+                <section class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="Digite seu e-mail" required>
+                </section>
+
+                <section class="campo">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha"
+                           placeholder="Digite sua senha" required>
+                </section>
+
+                <section class="opcoes">
+                    <label>
+                        <input type="checkbox" name="lembrar">
+                        Lembrar de mim
+                    </label>
+                    <a href="#recuperar" id="recuperar">Esqueceu a senha?</a>
+                </section>
+
+                <button type="submit">Entrar</button>
+                
+                <p id="mensagem" role="status" aria-live="polite"></p>
+            </form>
+
+            <p class="cadastro">Ainda não tem uma conta? <a href="#cadastro" id="cadastro">Cadastre-se</a></p>
+            <p class="aviso">Esta é uma tela de demonstração. Para validar contas, é necessário conectar um sistema de login.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FOCO — Plataforma de Estudos</p>
+    </footer>
+
+    
+<script>
+  const formulario = document.querySelector("#form-login");
+  const mensagem = document.querySelector("#mensagem");
+
+  formulario.addEventListener("submit", function(evento) {
+    evento.preventDefault();
+
+    // Verifica se os campos obrigatórios foram preenchidos
+    if (!formulario.checkValidity()) {
+      formulario.reportValidity();
+      return;
+    }
+
+    // Abre a página principal da plataforma
+    window.location.href = "foco_semantico.html";
+  });
+
+  document.querySelector("#recuperar").addEventListener("click", function(evento) {
+    evento.preventDefault();
+    mensagem.textContent =
+      "A recuperação de senha precisa ser configurada no sistema.";
+  });
+
+  document.querySelector("#cadastro").addEventListener("click", function(evento) {
+    evento.preventDefault();
+    mensagem.textContent =
+      "A página de cadastro pode ser criada separadamente.";
+  });
+</script>
+
+</body>
+</html>
