@@ -1,0 +1,381 @@
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOCO | Plataforma de Estudos</title>
+    <link rel="stylesheet" href="foco_estilo_semantico.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- Menu Mobile -->
+        <header class="app-header-mobile">
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <h1 style="font-size:18px; color:var(--texto-muito-escuro); font-weight:700;">FOCO</h1>
+        </header>
+
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>FOCO</h1>
+                <p>Plataforma de Estudos</p>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Navegação principal">
+                <ul>
+                    <li><a href="#inicio" class="nav-link active" data-secao="inicio"><span class="icon">📊</span>Início</a></li>
+                    <li><a href="#cronograma" class="nav-link" data-secao="cronograma"><span class="icon">📅</span>Cronograma</a></li>
+                    <li><a href="#tecnicas" class="nav-link" data-secao="tecnicas"><span class="icon">🧠</span>Técnicas</a></li>
+                    <li><a href="#materiais" class="nav-link" data-secao="materiais"><span class="icon">📚</span>Materiais</a></li>
+                    <li><a href="#simulados" class="nav-link" data-secao="simulados"><span class="icon">📝</span>Simulados</a></li>
+                    <li><a href="#tarefas" class="nav-link" data-secao="tarefas"><span class="icon">✅</span>Tarefas</a></li>
+                    <li><a href="#progresso" class="nav-link" data-secao="progresso"><span class="icon">📈</span>Progresso</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>&copy; 2026 FOCO</p>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content" id="main-content">
+            <div class="app-header-desktop" style="display:none;"></div>
+
+            <!-- ============ INÍCIO / DASHBOARD ============ -->
+            <section id="inicio" class="secao conteudo-ativo">
+                <div class="page-header">
+                    <h2>Bem-vindo de volta, estudante!</h2>
+                    <p>Organize seus estudos, acompanhe seu progresso e mantenha o foco nos seus objetivos.</p>
+                </div>
+
+                <div class="resumo-grid">
+                    <article class="cartao-resumo">
+                        <h3>Matérias cadastradas</h3>
+                        <p><strong id="dashboard-total-materias">0</strong></p>
+                    </article>
+                    <article class="cartao-resumo">
+                        <h3>Tarefas concluídas</h3>
+                        <p><strong id="dashboard-tarefas-concluidas">0</strong></p>
+                    </article>
+                    <article class="cartao-resumo">
+                        <h3>Tarefas pendentes</h3>
+                        <p><strong id="dashboard-tarefas-pendentes">0</strong></p>
+                    </article>
+                    <article class="cartao-resumo">
+                        <h3>Horas estudadas</h3>
+                        <p><strong id="dashboard-horas-estudadas">0</strong><span>h</span></p>
+                    </article>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+                    <div class="card">
+                        <h3>Próximas tarefas</h3>
+                        <ul id="lista-proximas-tarefas" style="list-style:none; padding:0;">
+                            <li class="estado-vazio" style="padding:20px;">Não há tarefas pendentes no momento.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Progresso dos estudos</h3>
+                        <div style="margin-bottom:16px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                                <span style="font-size:14px; color:var(--texto-escuro);">Conclusão geral</span>
+                                <span id="progresso-percentual" style="font-weight:600; color:var(--destaque);">0%</span>
+                            </div>
+                            <div class="progresso-barra">
+                                <div class="progresso-preenchimento" id="barra-progresso-geral"></div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px; color:var(--texto-secundario);">Acompanhe sua evolução e mantenha o ritmo de estudos.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:24px;">
+                    <h3>Resumo do cronograma diário</h3>
+                    <p id="resumo-cronograma" style="font-size:14px; color:var(--texto-escuro);">Nenhuma atividade agendada para hoje.</p>
+                </div>
+            </section>
+
+            <!-- ============ CRONOGRAMA ============ -->
+            <section id="cronograma" class="secao">
+                <div class="page-header">
+                    <h2>Cronograma de Estudos</h2>
+                    <p>Organize seus horários, disciplinas e atividades de estudo.</p>
+                </div>
+
+                <div class="card" style="max-width:600px;">
+                    <h3>Adicionar atividade</h3>
+                    <form id="form-cronograma" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:10px; align-items:end;">
+                        <div class="form-group">
+                            <label>Data</label>
+                            <input type="date" id="cron-data" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Início</label>
+                            <input type="time" id="cron-inicio" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Término</label>
+                            <input type="time" id="cron-fim" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Disciplina</label>
+                            <input type="text" id="cron-disciplina" placeholder="Ex: Matemática" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </form>
+                </div>
+
+                <div style="margin-top:24px;">
+                    <h3 style="margin-bottom:16px;">Atividades agendadas</h3>
+                    <table class="tabela-cronograma" id="tabela-cronograma">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Horário</th>
+                                <th>Disciplina</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-cronograma">
+                            <tr>
+                                <td colspan="4" class="estado-vazio" style="padding:24px;">Nenhuma atividade cadastrada.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ============ TÉCNICAS ============ -->
+            <section id="tecnicas" class="secao">
+                <div class="page-header">
+                    <h2>Técnicas de Estudo</h2>
+                    <p>Métodos comprovados para melhorar seu aprendizado e retenção de conteúdo.</p>
+                </div>
+
+                <div class="tecnicas-grid">
+                    <article class="tecnica-card">
+                        <span class="tecnica-icon">🍅</span>
+                        <h3>Pomodoro</h3>
+                        <p>Estude por 25 minutos com foco total, seguida de uma pausa curta de 5 minutos. Após 4 ciclos, faça uma pausa mais longa.</p>
+                    </article>
+
+                    <article class="tecnica-card">
+                        <span class="tecnica-icon">🔄</span>
+                        <h3>Revisão Espaçada</h3>
+                        <p>Revise o conteúdo em intervalos crescentes (1 dia, 1 semana, 1 mês) para fixar a informação na memória de longo prazo.</p>
+                    </article>
+
+                    <article class="tecnica-card">
+                        <span class="tecnica-icon">🎓</span>
+                        <h3>Método Feynman</h3>
+                        <p>Explique o conceito em termos simples, como se estivesse ensinando a uma criança. Identifique lacunas e revise o material.</p>
+                    </article>
+
+                    <article class="tecnica-card">
+                        <span class="tecnica-icon">🗺️</span>
+                        <h3>Mapas Mentais</h3>
+                        <p>Organize ideias visualmente, conectando o tópico central a subtópicos e detalhes, facilitando a memorização.</p>
+                    </article>
+
+                    <article class="tecnica-card">
+                        <span class="tecnica-icon">✍️</span>
+                        <h3>Estudo Ativo</h3>
+                        <p>Teste seu conhecimento com questões e flashcards em vez de apenas ler ou reler o material passivamente.</p>
+                    </article>
+
+                    <article class="tecnica-card">
+                        <span class="tecnica-icon">📝</span>
+                        <h3>Resumos</h3>
+                        <p>Reescreva os pontos principais com suas próprias palavras para reforçar o entendimento e criar material de revisão.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ============ MATERIAIS ============ -->
+            <section id="materiais" class="secao">
+                <div class="page-header">
+                    <h2>Materiais de Estudo</h2>
+                    <p>Organize links, livros, apostilas e recursos por disciplina.</p>
+                </div>
+
+                <div class="card" style="max-width:700px;">
+                    <h3>Adicionar material</h3>
+                    <form id="form-material" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px; align-items:end;">
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" id="mat-titulo" placeholder="Ex: Apostila de Cálculo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Disciplina</label>
+                            <input type="text" id="mat-disciplina" placeholder="Ex: Matemática" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select id="mat-categoria">
+                                <option value="Apostila">Apostila</option>
+                                <option value="Livro">Livro</option>
+                                <option value="Link">Link</option>
+                                <option value="Vídeo">Vídeo</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Link ou descrição</label>
+                            <input type="text" id="mat-link" placeholder="URL ou observações">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </form>
+                </div>
+
+                <div style="margin-top:24px;">
+                    <h3 style="margin-bottom:16px;">Meus materiais</h3>
+                    <div class="materiais-grid" id="lista-materiais">
+                        <div class="estado-vazio" style="grid-column:1/-1; padding:40px 20px;">Nenhum material cadastrado.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ SIMULADOS ============ -->
+            <section id="simulados" class="secao">
+                <div class="page-header">
+                    <h2>Simulados</h2>
+                    <p>Teste seus conhecimentos com questões de múltipla escolha.</p>
+                </div>
+
+                <div class="simulado-lista" id="lista-simulados">
+                    <div class="simulado-card">
+                        <h3>Simulado de Matemática</h3>
+                        <p>10 questões sobre funções, equações e geometria.</p>
+                        <button class="btn btn-primary btn-sm" onclick="iniciarSimulado(0)">Iniciar simulado</button>
+                    </div>
+                    <div class="simulado-card">
+                        <h3>Simulado de Português</h3>
+                        <p>10 questões sobre interpretação de texto e gramática.</p>
+                        <button class="btn btn-primary btn-sm" onclick="iniciarSimulado(1)">Iniciar simulado</button>
+                    </div>
+                </div>
+
+                <div id="area-simulado" class="hidden" style="max-width:700px; margin-top:24px;">
+                    <div class="card">
+                        <div id="simulado-pergunta-container">
+                            <div class="questao" id="questao-atual"></div>
+                            <div style="display:flex; gap:8px; justify-content:flex-end;">
+                                <button class="btn btn-secondary" id="btn-anterior" style="display:none;">Anterior</button>
+                                <button class="btn btn-primary" id="btn-proximo">Próximo</button>
+                                <button class="btn btn-primary" id="btn-finalizar" style="display:none;">Finalizar</button>
+                            </div>
+                        </div>
+                        <div id="resultado-simulado" class="hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ TAREFAS ============ -->
+            <section id="tarefas" class="secao">
+                <div class="page-header">
+                    <h2>Minhas Tarefas</h2>
+                    <p>Cadastre atividades, defina prazos e acompanhe o status de conclusão.</p>
+                </div>
+
+                <div class="card" style="max-width:700px;">
+                    <h3>Nova tarefa</h3>
+                    <form id="form-tarefa" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px; align-items:end;">
+                        <div class="form-group">
+                            <label>Tarefa</label>
+                            <input type="text" id="tarefa-nome" placeholder="Ex: Estudar frações" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Disciplina</label>
+                            <input type="text" id="tarefa-disciplina" placeholder="Ex: Matemática">
+                        </div>
+                        <div class="form-group">
+                            <label>Prazo</label>
+                            <input type="date" id="tarefa-prazo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Prioridade</label>
+                            <select id="tarefa-prioridade">
+                                <option value="baixa">Baixa</option>
+                                <option value="media" selected>Média</option>
+                                <option value="alta">Alta</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar tarefa</button>
+                    </form>
+                </div>
+
+                <div style="margin-top:24px; display:flex; gap:12px; margin-bottom:16px;">
+                    <button class="btn btn-secondary btn-sm" onclick="filtrarTarefas('todas')">Todas</button>
+                    <button class="btn btn-secondary btn-sm" onclick="filtrarTarefas('pendentes')">Pendentes</button>
+                    <button class="btn btn-secondary btn-sm" onclick="filtrarTarefas('concluidas')">Concluídas</button>
+                </div>
+
+                <div style="margin-top:24px;">
+                    <h3 style="margin-bottom:16px;">Lista de tarefas</h3>
+                    <ul id="lista-tarefas">
+                        <li class="estado-vazio" style="padding:20px;">Nenhuma tarefa cadastrada.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ============ PROGRESSO ============ -->
+            <section id="progresso" class="secao">
+                <div class="page-header">
+                    <h2>Progresso dos Estudos</h2>
+                    <p>Acompanhe sua evolução e desempenho ao longo do tempo.</p>
+                </div>
+
+                <div class="progresso-grid">
+                    <div class="progress-card">
+                        <h4>Tarefas concluídas</h4>
+                        <p id="progresso-total-concluidas">0</p>
+                    </div>
+                    <div class="progress-card">
+                        <h4>Taxa de conclusão</h4>
+                        <p id="progresso-taxa">0%</p>
+                    </div>
+                    <div class="progress-card">
+                        <h4>Horas estudadas</h4>
+                        <p id="progresso-horas">0h</p>
+                    </div>
+                    <div class="progress-card">
+                        <h4>Simulados realizados</h4>
+                        <p id="progresso-simulados">0</p>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+                    <div class="card">
+                        <h3>Evolução semanal (horas)</h3>
+                        <div class="grafico-semanal">
+                            <div class="barras-semana" id="grafico-barras"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Desempenho nos simulados</h3>
+                        <div id="lista-desempenho-simulados">
+                            <div class="estado-vazio" style="padding:20px;">Nenhum simulado realizado.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 FOCO — Plataforma de Estudos</p>
+    </footer>
+
+    <script src="foco_app.js"></script>
+</body>
+</html>
